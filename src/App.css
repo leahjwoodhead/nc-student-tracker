@@ -2,15 +2,33 @@
 
 body {
   text-align: center;
-  font-family: MarkPro,sans-serif;
+  font-family: MarkPro, sans-serif;
 }
 
 .outerBlock {
-  background-color: white;
-  width: 100%;
-  display: flex;
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  background-color: #d80c0c;
+  padding: 10px;
+  margin-top: 2rem;
+  max-width: 90%;
   margin: auto;
-  justify-content: center;
-  height: 1000px;
 }
 
+button {
+  margin: 1rem;
+  padding: 0.5rem;
+  width: 200px;
+  font-size: 18px;
+}
+
+button:hover {
+  background-color: #dc0000e7;
+
+  box-shadow: 0px 0px 10px red;
+  transition: ease-in-out;
+}
+
+#progress-button {
+  width: auto;
+}
