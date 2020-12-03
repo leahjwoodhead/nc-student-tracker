@@ -1,9 +1,13 @@
-import axios from 'axios'
+import axios from 'axios';
 
-const fetchStudents = () => {
-    return axios.get('https://nc-student-tracker.herokuapp.com/api/students?graduated=false').then(res => {
-        return res.data.students
-    })
-}
+const fetchStudents = (isGraduate) => {
+  return axios
+    .get(
+      `https://nc-student-tracker.herokuapp.com/api/students?graduated=${isGraduate}`
+    )
+    .then((res) => {
+      return res.data.students;
+    });
+};
 
-export default fetchStudents
+export default fetchStudents;
