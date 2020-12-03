@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const fetchStudents = (isGraduate) => {
+export const fetchStudents = (isGraduate) => {
   return axios
     .get(
       `https://nc-student-tracker.herokuapp.com/api/students?graduated=${isGraduate}`
@@ -9,5 +9,3 @@ const fetchStudents = (isGraduate) => {
       return res.data.students;
     });
 };
-
-export default fetchStudents;

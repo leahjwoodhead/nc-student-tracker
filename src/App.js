@@ -2,10 +2,10 @@ import './App.css';
 import Header from './components/Header'
 import Nav from './components/Nav'
 import { Router } from '@reach/router'
-import Home from './pages/Home'
-import Students from './pages/Students'
-import Graduates from './pages/Graduates'
-import BlockBreakdown from './pages/BlockBreakdown'
+import Home from './components/Home'
+import Students from './components/Students'
+import Graduates from './components/Graduates'
+import BlockBreakdown from './components/BlockBreakdown'
 
 function App() {
   return (

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Grid from '../components/Grid';
-import fetchStudents from '../components/api';
+import Grid from './Grid';
+import {fetchStudents} from './api';
 import { css } from "@emotion/core";
 import ClockLoader from "react-spinners/ClockLoader"
 
