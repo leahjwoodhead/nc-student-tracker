@@ -31,15 +31,9 @@ const Block = (props) => {
             <p>{student.name}</p>
             <div
               onClick={() => {
-                props.removeFromBlock(student._id);
-              }}
+                props.removeFromBlock(student)}}
             >
               <button
-                id='progress-button'
-                onClick={() => {
-                  console.log('Clicked to advance');
-                  props.advanceStudent(student);
-                }}
               >
                 Advance
               </button>

@@ -38,52 +38,31 @@ class BlockBreakdown extends Component {
     });
   }
 
-  // Removes student from current block
-  removeFromBlock = (studentId) => {
+  
+  removeFromBlock = (student) => {
     this.setState((currState) => {
-      const newState = {
-        fundamentals: currState.fundamentals.filter(
-          (person) => person._id !== studentId
-        ),
-        backend: currState.backend.filter((person) => person._id !== studentId),
-        frontend: currState.frontend.filter(
-          (person) => person._id !== studentId
-        ),
-        project: currState.project.filter((person) => person._id !== studentId),
-      };
-      return newState;
-    });
-  };
+        const fundamentals = currState.fundamentals.filter((person) => person._id !== student._id)
+        const backend = currState.backend.filter((person) => person._id !== student._id)
+        const frontend= currState.frontend.filter((person) => person._id !== student._id)
+        const project= currState.project.filter((person) => person._id !== student._id)
+        
+        if (student.currentBlock === 'fun') {
+            backend.unshift(student);
+          } else if (student.currentBlock === 'be') {
+            frontend.unshift(student);
+          } else if (student.currentBlock === 'fe') {
+            project.unshift(student);
+          } else if (student.currentBlock === 'proj') {
+            console.log('GRADUATED!');
+          }
 
-  // Students can only advance to the block after
-  // ['Fundamentals','Backend','Frontend','Project']
-  // [1,2,3,4]
-  // takes student object as argument
-  // e.g. IF student.currentBlock === 'fun', this.state.backend.unshift(student)
-
-  advanceStudent = (student) => {
-    this.setState((currState) => {
-      const fundamentals = currState.fundamentals;
-      const backend = currState.backend;
-      const frontend = currState.frontend;
-      const project = currState.project;
-
-      if (student.currentBlock === 'fun') {
-        backend.unshift(student);
-      } else if (student.currentBlock === 'be') {
-        frontend.unshift(student);
-      } else if (student.currentBlock === 'fe') {
-        project.unshift(student);
-      } else if (student.currentBlock === 'proj') {
-        console.log('GRADUATED!');
-      }
-
-      const newState = {
-        backend: backend,
-        frontend: frontend,
-        project: project,
-      };
-      return newState;
+        const newState = {
+            fundamentals: fundamentals,
+            backend: backend,
+            frontend: frontend,
+            project: project
+        }
+        return newState;
     });
   };
 
