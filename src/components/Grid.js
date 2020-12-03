@@ -10,10 +10,25 @@ const GridContainer = styled.ul`
 
 const ListItem = styled.li`
   list-style: none;
-  border: 1px solid black;
+  border: 2px inset;
   width: 200px;
   height: 200px;
   margin: 20px;
+  border-radius: 5px;
+  border-color: ${(props) => {
+    const { block } = props
+    if (block === "be") {
+      return '#007aff';
+    } else if (block === "fe") {
+      return '#eb1b24;';
+    } else if (block === "p")  {
+      return '#f8f163'
+    } else if (block === "fun") {
+      return 'green'
+    } 
+  }};
+
+  
 `;
 
 const Grid = (props) => {
@@ -22,7 +37,7 @@ const Grid = (props) => {
       <GridContainer>
         {props.students.map((student) => {
           return (
-            <ListItem key={student._id}>
+            <ListItem key={student._id} block={student.currentBlock}>
               <h2>{student.name}</h2>
               <p>
                 Starting Cohort: {student.startingCohort}

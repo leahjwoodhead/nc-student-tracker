@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
 import Grid from '../components/Grid';
 import fetchStudents from '../components/api';
+import { css } from "@emotion/core";
+import ClockLoader from "react-spinners/ClockLoader"
+
+const override = css`
+  display: block;
+  margin: 100px auto;
+  border-color: red;
+`;
 
 class Graduates extends Component {
   state = {
@@ -15,7 +23,12 @@ class Graduates extends Component {
   render() {
     const { graduates, isLoading } = this.state;
     if (isLoading) {
-      return <p>Loading...</p>;
+      return  <ClockLoader
+      css={override}
+      size={150}
+      color={"#123abc"}
+      loading={this.state.loading}
+    />
     }
     return (
       <div>
