@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Grid from './Grid';
-import {fetchStudents} from './api';
-import { css } from "@emotion/core";
-import ClockLoader from "react-spinners/ClockLoader"
+import { fetchStudents } from './api';
+import { css } from '@emotion/core';
+import ClockLoader from 'react-spinners/ClockLoader';
 
 const override = css`
   display: block;
@@ -23,15 +23,18 @@ class Graduates extends Component {
   render() {
     const { graduates, isLoading } = this.state;
     if (isLoading) {
-      return  <ClockLoader
-      css={override}
-      size={150}
-      color={"#123abc"}
-      loading={this.state.loading}
-    />
+      return (
+        <ClockLoader
+          css={override}
+          size={150}
+          color={'#123abc'}
+          loading={this.state.loading}
+        />
+      );
     }
     return (
       <div>
+        <h2>Number of graduates: {this.state.graduates.length}</h2>
         <Grid students={graduates} />
       </div>
     );

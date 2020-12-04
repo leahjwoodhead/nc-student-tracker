@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Grid from './Grid';
-import {fetchStudents} from './api';
-import { css } from "@emotion/core";
-import ClockLoader from "react-spinners/ClockLoader"
+import { fetchStudents } from './api';
+import { css } from '@emotion/core';
+import ClockLoader from 'react-spinners/ClockLoader';
 
 const override = css`
   display: block;
@@ -50,17 +50,23 @@ class Students extends Component {
   render() {
     const { displayedStudents, isLoading } = this.state;
     if (isLoading) {
-      return  <ClockLoader
-      css={override}
-      size={150}
-      color={"#123abc"}
-      loading={this.state.loading}
-    />
+      return (
+        <ClockLoader
+          css={override}
+          size={150}
+          color={'#123abc'}
+          loading={this.state.loading}
+        />
+      );
     }
 
     return (
       <div>
-    
+        <h2>
+          Number of students: {this.state.displayedStudents.length}/
+          {this.state.allStudents.length}
+        </h2>
+
         <h3>Filter by block:</h3>
         <select onChange={this.handleBlockFilter}>
           <option value='all'>Everyone</option>

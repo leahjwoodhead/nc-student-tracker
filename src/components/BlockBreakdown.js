@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { fetchStudents } from './api';
+import * as api from './api';
 import Block from './Block';
 
 class BlockBreakdown extends Component {
@@ -13,7 +13,7 @@ class BlockBreakdown extends Component {
   };
 
   componentDidMount() {
-    fetchStudents(false).then((studentsData) => {
+    api.fetchStudents(false).then((studentsData) => {
       const students = studentsData;
       const fundamentals = students.filter(
         (student) => student.currentBlock === 'fun'
@@ -38,38 +38,65 @@ class BlockBreakdown extends Component {
     });
   }
 
-  
-  removeFromBlock = (student) => {
-    this.setState((currState) => {
-        const fundamentals = currState.fundamentals.filter((person) => person._id !== student._id)
-        const backend = currState.backend.filter((person) => person._id !== student._id)
-        const frontend= currState.frontend.filter((person) => person._id !== student._id)
-        const project= currState.project.filter((person) => person._id !== student._id)
-        
-        if (student.currentBlock === 'fun') {
-            backend.unshift(student);
-          } else if (student.currentBlock === 'be') {
-            frontend.unshift(student);
-          } else if (student.currentBlock === 'fe') {
-            project.unshift(student);
-          } else if (student.currentBlock === 'proj') {
-            console.log('GRADUATED!');
-          }
+  advanceStudent = (studentId) => {
+    api.editStudentProgress(studentId, true).then((student) => {
+      console.log(student);
+      this.setState((currState) => {
+        // removes student from old block
+        const fundamentals = currState.fundamentals.filter(
+          (person) => person._id !== student._id
+        );
+        const backend = currState.backend.filter(
+          (person) => person._id !== student._id
+        );
+        const frontend = currState.frontend.filter(
+          (person) => person._id !== student._id
+        );
+        const project = currState.project.filter(
+          (person) => person._id !== student._id
+        );
+        console.log(student);
+
+        if (
+          student.blockHistory[student.blockHistory.length - 1].slug === 'be'
+        ) {
+          console.log(student);
+          // student.currentBlock = 'be';
+          backend.unshift(student);
+        } else if (
+          student.blockHistory[student.blockHistory.length - 1].slug === 'fe'
+        ) {
+          // student.currentBlock = 'fe';
+          frontend.unshift(student);
+        } else if (
+          student.blockHistory[student.blockHistory.length - 1].slug === 'proj'
+        ) {
+          // student.currentBlock = 'proj';
+          project.unshift(student);
+        }
+        // else if (student.currentBlock === 'proj') {
+        //   console.log('GRADUATED!');
+        // }
 
         const newState = {
-            fundamentals: fundamentals,
-            backend: backend,
-            frontend: frontend,
-            project: project
-        }
+          fundamentals: fundamentals,
+          backend: backend,
+          frontend: frontend,
+          project: project,
+        };
         return newState;
+      });
     });
   };
 
-  resitStudent = () => {};
+  resitStudent = (studentId) => {
+    api.editStudentProgress(studentId, false).then((student) => {
+      console.log(student);
+    });
+  };
 
   render() {
-    const { students, isLoading } = this.state;
+    const { isLoading } = this.state;
     if (isLoading) {
       return <p>Loading...</p>;
     }
@@ -78,28 +105,24 @@ class BlockBreakdown extends Component {
         <Block
           block='Fundamentals'
           students={this.state.fundamentals}
-          removeFromBlock={this.removeFromBlock}
           advanceStudent={this.advanceStudent}
           resitStudent={this.resitStudent}
         />
         <Block
           block='Backend'
           students={this.state.backend}
-          removeFromBlock={this.removeFromBlock}
           advanceStudent={this.advanceStudent}
           resitStudent={this.resitStudent}
         />
         <Block
           block='Frontend '
           students={this.state.frontend}
-          removeFromBlock={this.removeFromBlock}
           advanceStudent={this.advanceStudent}
           resitStudent={this.resitStudent}
         />
         <Block
           block='Project'
           students={this.state.project}
-          removeFromBlock={this.removeFromBlock}
           advanceStudent={this.advanceStudent}
           resitStudent={this.resitStudent}
         />
