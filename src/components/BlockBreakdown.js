@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import * as api from './api';
 import Block from './Block';
+import StudentAdder from './StudentAdder';
 
 class BlockBreakdown extends Component {
   state = {
@@ -95,38 +96,50 @@ class BlockBreakdown extends Component {
     });
   };
 
+  addToFundamentals = (student) => {
+    this.setState((currState) => {
+      const newState = {
+        fundamentals: [student, ...currState.fundamentals],
+      };
+      return newState;
+    });
+  };
+
   render() {
     const { isLoading } = this.state;
     if (isLoading) {
       return <p>Loading...</p>;
     }
     return (
-      <div className='outerBlock'>
-        <Block
-          block='Fundamentals'
-          students={this.state.fundamentals}
-          advanceStudent={this.advanceStudent}
-          resitStudent={this.resitStudent}
-        />
-        <Block
-          block='Backend'
-          students={this.state.backend}
-          advanceStudent={this.advanceStudent}
-          resitStudent={this.resitStudent}
-        />
-        <Block
-          block='Frontend '
-          students={this.state.frontend}
-          advanceStudent={this.advanceStudent}
-          resitStudent={this.resitStudent}
-        />
-        <Block
-          block='Project'
-          students={this.state.project}
-          advanceStudent={this.advanceStudent}
-          resitStudent={this.resitStudent}
-        />
-      </div>
+      <>
+        <StudentAdder addToFundamentals={this.addToFundamentals} />
+        <div className='outerBlock'>
+          <Block
+            block='Fundamentals'
+            students={this.state.fundamentals}
+            advanceStudent={this.advanceStudent}
+            resitStudent={this.resitStudent}
+          />
+          <Block
+            block='Backend'
+            students={this.state.backend}
+            advanceStudent={this.advanceStudent}
+            resitStudent={this.resitStudent}
+          />
+          <Block
+            block='Frontend '
+            students={this.state.frontend}
+            advanceStudent={this.advanceStudent}
+            resitStudent={this.resitStudent}
+          />
+          <Block
+            block='Project'
+            students={this.state.project}
+            advanceStudent={this.advanceStudent}
+            resitStudent={this.resitStudent}
+          />
+        </div>
+      </>
     );
   }
 }

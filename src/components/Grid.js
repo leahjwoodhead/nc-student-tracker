@@ -15,20 +15,18 @@ const ListItem = styled.li`
   height: 200px;
   margin: 20px;
   border-radius: 5px;
-  border-color: ${(props) => {
-    const { block } = props
-    if (block === "be") {
+  background-color: ${(props) => {
+    const { block } = props;
+    if (block === 'be') {
       return '#007aff';
-    } else if (block === "fe") {
+    } else if (block === 'fe') {
       return '#eb1b24;';
-    } else if (block === "p")  {
-      return '#f8f163'
-    } else if (block === "fun") {
-      return 'green'
-    } 
+    } else if (block === 'proj') {
+      return 'yellow';
+    } else if (block === 'fun') {
+      return 'green';
+    }
   }};
-
-  
 `;
 
 const Grid = (props) => {

@@ -24,21 +24,34 @@ export const editStudentProgress = (studentId, advance) => {
 };
 
 export const fetchOneStudent = (studentId) => {
-  return axios.get(`https://nc-student-tracker.herokuapp.com/api/students/${studentId}`).then(res => {
-    return res.data.student;
-  }).catch((err) => {
-    console.log(err)
-  })
-}
+  return axios
+    .get(`https://nc-student-tracker.herokuapp.com/api/students/${studentId}`)
+    .then((res) => {
+      return res.data.student;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+export const postStudent = (info) => {
+  return axios
+    .post('https://nc-student-tracker.herokuapp.com/api/students', info)
+    .then((res) => {
+      return res.data.student;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
 
 export const countRepeats = (arr) => {
-  
-  let repeats =[]
+  let repeats = [];
   for (let i = 0; i < arr.length; i++) {
     if (arr[i] === arr[i - 1]) {
-      repeats.push(arr[i])
+      repeats.push(arr[i]);
     }
   }
-  
-  return repeats
-}
+
+  return repeats;
+};
