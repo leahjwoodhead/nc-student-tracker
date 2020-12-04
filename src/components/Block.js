@@ -1,3 +1,4 @@
+import { Link } from '@reach/router';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -30,6 +31,16 @@ const Block = (props) => {
           <StudentCard key={student._id}>
             <h3>{student.name}</h3>
             <p>{student.currentBlock}</p>
+
+            <Link className='profileLink' to={`/students/${student._id}`}>
+              <p
+                onClick={() => {
+                  console.log({ student });
+                }}
+              >
+                <strong>Student Profile</strong>
+              </p>
+            </Link>
             <button
               onClick={() => {
                 props.advanceStudent(student._id);
