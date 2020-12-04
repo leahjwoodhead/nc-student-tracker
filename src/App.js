@@ -16,7 +16,7 @@ function App() {
       <Router>
         <Home path='/' />
         <Students path='/students' />
-        <StudentProfile path='/students/*' />
+        <StudentProfile path='/students/:student_id' />
         <Graduates path='/graduates' />
         <BlockBreakdown path='/blocks' />
       </Router>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Grid from './Grid';
-import { fetchStudents } from './api';
+import * as api from './api';
 import { css } from '@emotion/core';
 import ClockLoader from 'react-spinners/ClockLoader';
 
@@ -18,7 +18,7 @@ class Students extends Component {
   };
 
   componentDidMount() {
-    fetchStudents(false).then((students) => {
+    api.fetchStudents(false).then((students) => {
       this.setState({
         allStudents: students,
         displayedStudents: students,
